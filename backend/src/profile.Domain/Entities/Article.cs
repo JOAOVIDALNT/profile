@@ -35,8 +35,7 @@ namespace profile.Domain.Entities
             if (string.IsNullOrEmpty(content))
                 throw new ArgumentNullException("content");
 
-            if (content.Length < 100)
-                throw new Exception("Content must be at least 100 characters");
+            // TODO: VALIDATE CONTENT
             
             this.Content = content;
         }

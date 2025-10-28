@@ -2,6 +2,7 @@ using profile.API.Filters;
 using profile.Application;
 using profile.Infrastructure;
 using profile.Infrastructure.Data;
+using valet.lib.Auth.Service.Token.Middlewares;
 using valet.lib.Config;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +40,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

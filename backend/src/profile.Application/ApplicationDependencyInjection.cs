@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using profile.Application.Services.Article;
 using profile.Application.Services.User;
 
 namespace profile.Application;
@@ -16,5 +17,6 @@ public static class ApplicationDependencyInjection
     private static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IArticleService, ArticleService>();
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using profile.Domain.Interfaces.Repositories;
 using profile.Infrastructure.Data;
+using profile.Infrastructure.Data.Repositories;
 
 namespace profile.Infrastructure;
 
@@ -27,6 +29,7 @@ public static class InfrastructureDependencyInjection
     
     private static void AddRepositories(this IServiceCollection services)
     {
-        
+        services.AddScoped<IArticleRepository, ArticleRepository>();
+        services.AddScoped<ISubscriberRepository, SubscriberRepository>();
     }
 }

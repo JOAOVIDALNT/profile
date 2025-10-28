@@ -1,3 +1,4 @@
+using profile.Application;
 using profile.Infrastructure;
 using profile.Infrastructure.Data;
 using valet.lib.Config;
@@ -12,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
 
 builder.Services.AddValet<AppDbContext>(builder.Configuration, options =>
 {

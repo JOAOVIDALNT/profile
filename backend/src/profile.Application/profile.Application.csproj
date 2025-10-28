@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\profile.Infrastructure\profile.Infrastructure.csproj" />
+    <ProjectReference Include="..\profile.Shared\profile.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

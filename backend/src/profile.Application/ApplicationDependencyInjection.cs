@@ -6,9 +6,11 @@ namespace profile.Application;
 
 public static class ApplicationDependencyInjection
 {
-    public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddServices();
+        
+        return services;
     }
 
     private static void AddServices(this IServiceCollection services)

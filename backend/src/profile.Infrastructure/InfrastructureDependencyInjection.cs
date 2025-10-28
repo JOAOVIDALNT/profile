@@ -9,14 +9,16 @@ namespace profile.Infrastructure;
 
 public static class InfrastructureDependencyInjection 
 {
-    public static void AddInfrastructure(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration config)
     {
         services.AddRepositories();
 
         if (config.GetValue<bool>("InMemoryTest"))
-            return;
+            return services;
 
         services.AddDatabase(config);
+        
+        return services;
     }
 
     private static void AddDatabase(this IServiceCollection services, IConfiguration config)

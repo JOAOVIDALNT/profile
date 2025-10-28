@@ -1,3 +1,3 @@
 ﻿namespace profile.Application.DTOs.User.Login;
 
-public record UserLoginResponse();
+public record UserLoginResponse(string token);

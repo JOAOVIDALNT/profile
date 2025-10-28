@@ -14,13 +14,15 @@ public class UserService : IUserService
     private readonly IUnitOfWork _unitOfWork;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IRoleRepository _roleRepository;
+    private readonly ITokenGenerator _tokenGenerator;
 
-    public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, IPasswordHasher passwordHasher,  IRoleRepository roleRepository)
+    public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork, IPasswordHasher passwordHasher,  IRoleRepository roleRepository, ITokenGenerator tokenGenerator)
     {
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
         _passwordHasher = passwordHasher;
         _roleRepository = roleRepository;
+        _tokenGenerator = tokenGenerator;
     }
 
     public async Task Signup(UserSignupRequest request)
@@ -41,8 +43,20 @@ public class UserService : IUserService
 
     public async Task<UserLoginResponse> Login(UserLoginRequest request)
     {
-        throw new NotImplementedException();
-    }
+        // TODO: VALIDATE
+        
+        var user = await _userRepository.GetAsync(x => x.Email == request.email, false);
+        
+        if (user == null)
+            throw new Exception("User not found"); // TODO: CUSTOM EXCPETIONSS
+        
+        if (!_passwordHasher.VerifyPassword(request.password, user.Password))
+            throw new Exception("Invalid password");
+
+        var token = _tokenGenerator.GenerateToken(user);
+
+        return new UserLoginResponse(token);
+    }   
 
     private async Task<Role> RoleHandler()
     {

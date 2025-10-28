@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using profile.Application.DTOs.User.Login;
 using profile.Application.DTOs.User.Signup;
 using profile.Application.Services.User;
 using valet.lib.Core.Exception.Response;
@@ -17,5 +18,14 @@ public class UserController : ControllerBase
     {
         await userService.Signup(request);
         return Created(string.Empty, null);
+    }
+    
+    [HttpPost("login")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> UserLogin([FromBody] UserLoginRequest request, [FromServices] IUserService userService)
+    {
+        return Ok(await userService.Login(request));
     }
 }

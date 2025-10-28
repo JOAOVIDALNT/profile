@@ -22,10 +22,9 @@ Pra esse projeto, tenho os seguintes requisitos:
 
 ## CUIDADOS
 - Evitar testes no MVP, o foco é nos objetos de estudo.
-- Evitar overengenering, ex: embora usando DDD, não vou aplicar o modelo de domínio rico para entidades
 - cuidar com os custos e a segurança desde o primeiro deploy
 - validar se os requisitos e objetos de estudos estão sendo implementados e documentar qualquer mudança.
 
 ## PRAZO
-Esse projeto tem um prazo de 2 dias -> 25/10 -- 26/10 para o MVP. Todos os requisitos previamente listados devem estar presentes no MVP.
+Esse projeto tem um prazo de 5 dias -> 27/10 -- 31/10 para o MVP. Todos os requisitos previamente listados devem estar presentes no MVP.
 

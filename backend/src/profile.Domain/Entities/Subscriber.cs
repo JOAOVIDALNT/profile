@@ -13,6 +13,10 @@ namespace profile.Domain.Entities
             SetEmail(email);
         }
 
+        private Subscriber()
+        {
+        }
+
         private void SetEmail(string email)
         {
             if (!IsEmailValid(email))

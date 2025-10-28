@@ -9,11 +9,15 @@ namespace profile.Domain.Entities
         public virtual LocalUser Author { get; private set; }
         public Guid AuthorId { get; private set; }
 
-        public Article(string title, string content, LocalUser author)
+        public Article(string title, string content, Guid authorId)
         {
             SetTitle(title);
             SetContent(content);
-            SetAuthor(author);
+            SetAuthor(authorId);
+        }
+
+        private Article()
+        {
         }
 
         private void SetTitle(string title)
@@ -37,16 +41,11 @@ namespace profile.Domain.Entities
             this.Content = content;
         }
 
-        private void SetAuthor(LocalUser author)
+        private void SetAuthor(Guid authorId)
         {
-            if (author == null)
-                throw new ArgumentNullException("author");
-
-            if (author.Id == Guid.Empty)
-                throw new ArgumentNullException("author");
-                
-            this.Author = author;
-            this.AuthorId = author.Id;
+            if (authorId == Guid.Empty)
+                throw new ArgumentNullException("authorId");
+            this.AuthorId = authorId;
         }
     }
 }

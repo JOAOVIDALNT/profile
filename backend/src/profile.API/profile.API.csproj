@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\profile.Application\profile.Application.csproj" />
     <ProjectReference Include="..\profile.Shared\profile.Shared.csproj" />
   </ItemGroup>

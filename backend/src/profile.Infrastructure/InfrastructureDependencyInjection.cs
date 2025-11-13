@@ -33,5 +33,6 @@ public static class InfrastructureDependencyInjection
     {
         services.AddScoped<IArticleRepository, ArticleRepository>();
         services.AddScoped<ISubscriberRepository, SubscriberRepository>();
+        services.AddScoped<ILocalUserRepository, LocalUserRepository>();
     }
 }

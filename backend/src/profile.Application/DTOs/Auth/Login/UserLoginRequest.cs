@@ -1,3 +1,3 @@
-﻿namespace profile.Application.DTOs.User.Login;
+﻿namespace profile.Application.DTOs.Auth.Login;
 
 public record UserLoginRequest(string email, string password);

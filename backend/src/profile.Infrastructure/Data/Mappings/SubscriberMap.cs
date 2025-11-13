@@ -11,8 +11,8 @@ public class SubscriberMap : IEntityTypeConfiguration<Subscriber>
         builder.ToTable("TB_SUBSCRIBER").HasKey(x => x.Id);
         
         builder.Property(x => x.Id).HasColumnName("SUB_ID").IsRequired();
-        builder.Property(x => x.CreatedAt).HasColumnName("SUB_CREATED_AT").IsRequired();
-        builder.Property(x => x.UpdatedAt).HasColumnName("SUB_UPDATED_AT").IsRequired();
+        builder.Property(x => x.CreatedAt).HasColumnName("SUB_CREATED_AT");
+        builder.Property(x => x.UpdatedAt).HasColumnName("SUB_UPDATED_AT");
         builder.Property(x => x.Email).HasColumnName("SUB_EMAIL").HasMaxLength(100);
 
         builder.HasMany(s => s.Subscriptions)

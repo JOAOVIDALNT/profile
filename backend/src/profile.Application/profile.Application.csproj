@@ -11,4 +11,8 @@
     <ProjectReference Include="..\profile.Shared\profile.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\User\" />
+  </ItemGroup>
+
 </Project>

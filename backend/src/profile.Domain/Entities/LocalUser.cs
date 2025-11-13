@@ -7,6 +7,5 @@ namespace profile.Domain.Entities
     {
         public virtual ICollection<Subscriber> Subscribers { get; set; } = [];
         public virtual ICollection<Article> Articles { get; set; } = [];
-
     }
 }

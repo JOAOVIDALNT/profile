@@ -18,10 +18,10 @@ public class ArticleController : ControllerBase
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> ArticleCreate([FromBody] ArticleCreateRequest request, [FromServices] IArticleService articleService)
+    public async Task<IActionResult> Create([FromBody] ArticleCreateRequest request, [FromServices] IArticleService service)
     {
         var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
-        await articleService.Create(request, Guid.Parse(userId!));
+        await service.Create(request, Guid.Parse(userId!));
         return Created(string.Empty, null);
     }
     
@@ -31,9 +31,9 @@ public class ArticleController : ControllerBase
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> ListArticles([FromServices] IArticleService articleService)
+    public async Task<IActionResult> List([FromServices] IArticleService service)
     {
-        return Ok(await articleService.GetAllArticlesFromUser());
+        return Ok(await service.GetAllArticlesFromUser());
     }
     
 }

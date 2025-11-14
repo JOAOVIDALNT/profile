@@ -1,3 +1,3 @@
 ﻿namespace profile.Application.DTOs.User.Register;
 
-public record UserRegisterRequest(string firtsName, string lastName, string email, string password);
+public record UserRegisterRequest(string firstName, string lastName, string email, string password);

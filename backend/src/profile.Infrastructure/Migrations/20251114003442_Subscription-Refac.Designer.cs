@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using profile.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using profile.Infrastructure.Data;
 namespace profile.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251114003442_Subscription-Refac")]
+    partial class SubscriptionRefac
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,7 +85,7 @@ namespace profile.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TB_SUBSCRIBERS", (string)null);
+                    b.ToTable("TB_SUBSCRIBER", (string)null);
                 });
 
             modelBuilder.Entity("profile.Domain.Entities.Subscription", b =>

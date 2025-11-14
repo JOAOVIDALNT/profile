@@ -31,7 +31,7 @@ public class ArticleController : ControllerBase
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
-    public async Task<IActionResult> List([FromServices] IArticleService service)
+    public async Task<IActionResult> GetAllArticlesFromUser([FromServices] IArticleService service)
     {
         return Ok(await service.GetAllArticlesFromUser());
     }

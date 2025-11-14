@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using profile.Application.DTOs.Subscriber;
+using profile.Application.DTOs.User.Subscribe;
 using profile.Application.DTOs.User.Register;
+using profile.Application.DTOs.User.Subscribers;
 using profile.Domain.Entities;
 using profile.Domain.Interfaces.Repositories;
 using valet.lib.Auth.Domain.Entities;
@@ -14,14 +15,15 @@ public class UserService(
     ILocalUserRepository userRepository,
     IUnitOfWork unitOfWork,
     IPasswordHasher passwordHasher,
-    IRoleRepository roleRepository)
+    IRoleRepository roleRepository,
+    ISubscriptionRepository subscriptionRepository)
     : IUserService
 {
     public async Task Register(UserRegisterRequest request)
     {
         // TODO: VALIDATE
         
-        var user = new LocalUser(request.firtsName, request.lastName, request.email, request.password);
+        var user = new LocalUser(request.firstName, request.lastName, request.email, request.password);
         
         user.UpdatePassword(passwordHasher.HashPassword(request.password));
 
@@ -42,13 +44,29 @@ public class UserService(
         if (author == null)
             throw new ApplicationException("Author not found"); //TODO: CUSTOM EXCEPTION
         
+        if (author.Subscribers.Any(x => x.Subscriber.Email == request.email))
+            throw new ApplicationException("Email already registered");
+        
         var subscriber = new Domain.Entities.Subscriber(request.email);
         
-        author.Subscribers.Add(subscriber);
+        var subscription = new Subscription(author, subscriber);
+        
+        await subscriptionRepository.CreateAsync(subscription);
         
         await unitOfWork.CommitAsync();
     }
-    
+
+    public async Task<ListSubscribersResponse> ListSubscribers()
+    {
+        var author = await userRepository
+            .GetAsync(x => x.Email.Equals("joao.vidal@gmail.com"), 
+                include: q => 
+                q.Include(u => u.Subscribers)
+                    .ThenInclude(s => s.Subscriber));
+        
+        return new ListSubscribersResponse(author.Subscribers.Select(x => x.Subscriber.Email).ToList());
+    }
+
     private async Task<Role> RoleHandler()
     {
         if (!roleRepository.RoleExistsAsync("user").GetAwaiter().GetResult())

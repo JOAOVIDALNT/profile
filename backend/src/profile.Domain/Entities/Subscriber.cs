@@ -6,14 +6,14 @@ namespace profile.Domain.Entities
     public class Subscriber : BaseEntity
     {
         public string Email { get; private set; } = string.Empty;
-        public virtual ICollection<LocalUser> Subscriptions { get; set; } = [];
+        public virtual ICollection<Subscription> Subscriptions { get; set; } = [];
 
         public Subscriber(string email)
         {
             SetEmail(email);
         }
 
-        private Subscriber()
+        protected Subscriber()
         {
         }
 
